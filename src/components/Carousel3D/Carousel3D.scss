@@ -1,0 +1,114 @@
+:root {
+     --itemRotation: 0deg;
+     --carouselPerspective: 50vw;
+     --carouselRotation: 0deg;
+     --carouselTransition: all .5s ease-in-out;
+
+     --carouselZOffset: 0; // carousel "depth" offset
+     --carouselItemZOffset: 415.692px; // carousel item "radius" from center
+}
+
+.carousel3D__wrapper {
+     position: relative;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 50px;
+
+     perspective: var(--carouselPerspective);
+     perspective-origin: 50% calc(50% - 0em);
+
+     margin: 4rem 0;
+
+     .carousel3D__scene {
+          position: relative;
+          width: 100%;
+          transform-style: preserve-3d;
+          transform: translateZ(var(--carouselZOffset));
+
+          .carousel3D__carousel {
+               width: 100%;
+               aspect-ratio: 6 / 2.5;
+
+               transform-style: preserve-3d;
+               transform: rotateY(var(--carouselRotation));
+               transition: var(--carouselTransition);
+
+               > div {
+                    transition: all 0.15s ease-in-out;
+
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    // background-color: rgba(120, 10, 10, 0.2);
+                    // box-shadow: 0 0 0.5em #000a inset;
+                    padding: 1rem;
+                                        
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center center; 
+
+                    transform: rotateY(var(--itemRotation)) translateZ(var(--carouselItemZOffset));
+
+                    h4 {
+                         font-size: .8em;
+                    }
+                    p {
+                         font-size: .45em;
+                    }
+                    h4, p { 
+                         opacity: 0; 
+                         transition: opacity .2s ease-in-out;
+                    }
+
+                    &.carousel3D__item__active {
+                         h4, p { 
+                              opacity: 1; 
+                         } 
+                    }
+               }
+
+               &:hover {
+                    * {
+                         background-color: rgba(255, 255, 255, 0.1);
+                    }
+               }
+          }
+     }
+
+     .carousel3D__controls {
+          position: absolute;
+          inset: 0 -50px 0 -50px;
+          display: flex;
+          justify-content: space-between;
+          z-index: 2;
+
+          button {
+               width: 50px;
+               background: unset;
+               border: unset;
+               cursor: pointer;
+
+               span {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 50px;
+                    height: 50px;
+
+                    font-weight: 800;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+
+                    transition: background-color .3s ease-in-out;
+               }
+
+               &:hover span {
+                    background: rgba(255, 255, 255, 1);
+
+               }
+          }
+     }
+}
