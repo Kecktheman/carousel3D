@@ -37,13 +37,12 @@
 
                > div {
                     transition: all 0.15s ease-in-out;
-
+                    display: flex;
                     position: absolute;
                     width: 100%;
                     height: 100%;
                     // background-color: rgba(120, 10, 10, 0.2);
                     // box-shadow: 0 0 0.5em #000a inset;
-                    padding: 1rem;
                                         
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -51,27 +50,60 @@
 
                     transform: rotateY(var(--itemRotation)) translateZ(var(--carouselItemZOffset));
 
+                    article {
+                         width: 100%;
+                         padding: 2rem 2rem 6rem;
+                         margin-top: auto;
+                         background-image: linear-gradient(rgba(40, 40, 40, 0), rgba(40, 40, 40, 1));
+                         color: #fff;
+                         overflow: hidden;
+
+                         .carousel3D_overflow {
+                              position: absolute;
+                              inset: calc(100% - 6rem) 0 0 0;
+                              height: 6rem;
+                              background-image: linear-gradient(rgba(40, 40, 40, 0), #000);
+                         }
+                    }
+
+                    a {
+                         color: #fff;
+                         text-decoration: none;
+                         font-size: 2rem;
+
+                         svg {
+                              margin-left: 1rem;
+                              transition: all .3s ease-in-out;
+                              opacity: .7;
+                         }
+                         &:hover svg {
+                              padding-left: .5rem;
+                              opacity: 1;
+                         }
+                    }
+
                     h4 {
                          font-size: .8em;
+                         margin-bottom: 1rem;
                     }
                     p {
                          font-size: .45em;
-                    }
-                    h4, p { 
-                         opacity: 0; 
-                         transition: opacity .2s ease-in-out;
+                         // line-height: 3;
+                         max-width: 50ch;
+                         height: 3rem;
+                         max-height: 3rem;
                     }
 
+                    h4, p {
+                         opacity: 0; 
+                         transform: translateY(-8rem);
+                         transition: opacity .4s ease-in-out, transform .4s ease-in;
+                    }
                     &.carousel3D__item__active {
                          h4, p { 
+                              transform: translateY(0);
                               opacity: 1; 
                          } 
-                    }
-               }
-
-               &:hover {
-                    * {
-                         background-color: rgba(255, 255, 255, 0.1);
                     }
                }
           }
@@ -79,35 +111,38 @@
 
      .carousel3D__controls {
           position: absolute;
-          inset: 0 -50px 0 -50px;
           display: flex;
-          justify-content: space-between;
+          top: 0;
+          bottom: 0;
           z-index: 2;
 
+          &.carousel3D_controls_left {
+               left: -10rem;
+
+               &:hover svg {
+                    padding-right: 2rem;
+               }
+          }
+
+          &.carousel3D_controls_right {
+               right: -10rem;
+
+               &:hover svg {
+                    padding-left: 2rem;
+               }
+          }
+
           button {
-               width: 50px;
                background: unset;
                border: unset;
                cursor: pointer;
 
-               span {
-                    display: inline-flex;
-                    justify-content: center;
-                    align-items: center;
+               width: 8rem;
+               font-size: 2rem;
+               color: #fff;
 
-                    width: 50px;
-                    height: 50px;
-
-                    font-weight: 800;
-                    background: rgba(255, 255, 255, 0.5);
-                    border-radius: 50%;
-
-                    transition: background-color .3s ease-in-out;
-               }
-
-               &:hover span {
-                    background: rgba(255, 255, 255, 1);
-
+               svg {
+                    transition: all .3s ease-in-out;
                }
           }
      }

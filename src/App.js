@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Carousel3D from "./components/Carousel3D/Carousel3D"
-
 import './App.scss';
 
 import bridge from "./images/bridge.png"
@@ -15,7 +14,7 @@ function App() {
      const { useRef, useEffect, useState } = React
 
      let [gridList, setGridList] = useState([])
-     let [perspective, setPerspective] = useState('160vw')
+     let [perspective, setPerspective] = useState('160')
      let options = {
           items: gridList,
           transition: 'all .5s ease-in-out',
@@ -23,45 +22,38 @@ function App() {
           backfaceVisibility: 'hidden'
      }
 
+     let _gridList = [
+          { label: 'Skottland', link: '#', text: 'Skottland är en självstyrande riksdel inom Storbritannien. Skottland upptar den norra tredjedelen av ön Storbritannien och delar gräns med England i söder medan det avgränsas av Nordsjön i öster,', backgroundColor: 'hsl(212, 100%, 60%)', backgroundImage: bridge },
+          { label: 'Se Mälmo', text: 'Malmö är Sveriges tredje största tätort och Nordens sjätte största med 316 588 invånare i tätorten samt även länet Skånes residensstad.', backgroundColor: 'hsl(150, 100%, 60%)', backgroundImage: city },
+          { label: 'Saharas strand', text: 'Dock utan hav.', backgroundColor: 'hsl(30, 100%, 50%)', backgroundImage: dessert },
+     ]
+
      function setSevenItems() {
-          let _gridList = []
-          _gridList.push(
-               { label: 'Scötland', text: 'Här finns bron alla talar om!', backgroundColor: 'hsl(212, 100%, 60%)', backgroundImage: bridge },
-               { label: 'Se Mälmo', text: 'Staden i syd.', backgroundColor: 'hsl(150, 100%, 60%)', backgroundImage: city },
-               { label: 'Saharas strand', text: 'Dock utan hav.', backgroundColor: 'hsl(30, 100%, 50%)', backgroundImage: dessert },
+          setGridList([
+               ..._gridList,
                { label: 'Skogen i Storfors.', text: 'Kampingliv när det är som finast!', backgroundColor: 'hsl(75, 100%, 50%)', backgroundImage: forrest },
                { label: 'Mongolien', text: 'Sand, Smör, och Snus.', backgroundColor: 'red', backgroundImage: stepps },
                { label: 'Bergdalen.', text: '<Kommer snart>', backgroundColor: 'hsl(75, 100%, 50%)' },
                { label: 'Toppen av Mount Everest', text: '<Kommer snart>', backgroundColor: 'red' }
-          )
-          setGridList(_gridList)
+          ])
      }
 
      function setFiveItems() {
-          let _gridList = []
-          _gridList.push(
-               { label: 'Scötland', text: 'Här finns bron alla talar om!', backgroundColor: 'hsl(212, 100%, 60%)', backgroundImage: bridge },
-               { label: 'Se Mälmo', text: 'Staden i syd.', backgroundColor: 'hsl(150, 100%, 60%)', backgroundImage: city },
-               { label: 'Saharas strand', text: 'Dock utan hav.', backgroundColor: 'hsl(30, 100%, 50%)', backgroundImage: dessert },
+          setGridList([
+               ..._gridList,
                { label: 'Skogen i Storfors.', text: 'Kampingliv när det är som finast!', backgroundColor: 'hsl(75, 100%, 50%)', backgroundImage: forrest },
                { label: 'Mongolien', text: 'Sand, Smör, och Snus.', backgroundColor: 'red', backgroundImage: stepps }
-          )
-          setGridList(_gridList)
+          ])
      }
 
      function setThreeItems() {
-          let _gridList = []
-          _gridList.push(
-               { label: 'Scötland', text: 'Här finns bron alla talar om!', backgroundColor: 'hsl(212, 100%, 60%)', backgroundImage: bridge },
-               { label: 'Se Mälmo', text: 'Staden i syd.', backgroundColor: 'hsl(150, 100%, 60%)', backgroundImage: city },
-               { label: 'Saharas strand', text: 'Dock utan hav.', backgroundColor: 'hsl(30, 100%, 50%)', backgroundImage: dessert },
-          )
           setGridList(_gridList)
-
      }
 
      useEffect(() => {
-          options.gridList = gridList
+          let _options = options
+          _options.gridList = gridList
+          options = _options
      }, [gridList])
 
      useEffect(() => {
@@ -85,10 +77,10 @@ function App() {
                          <button onClick={() => setSevenItems()}>Set seven items</button>
                     </div>
                     <h2>Set perspective</h2>
-                    <input type="test" onChange={(e) => setPerspective(e.target.value)} value={options.perspective}></input>
+                    <input type="number" onChange={(e) => setPerspective(e.target.value)} value={options.perspective}></input>
                </div>
 
-               <Carousel3D options={options} />
+               { options && <Carousel3D options={options} />}
 
           </div>
      );
