@@ -51,9 +51,7 @@ function App() {
      }
 
      useEffect(() => {
-          let _options = options
-          _options.gridList = gridList
-          options = _options
+          options.gridList = gridList
      }, [gridList])
 
      useEffect(() => {

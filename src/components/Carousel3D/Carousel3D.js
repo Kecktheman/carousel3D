@@ -140,13 +140,19 @@ function calculateCarouselItemZOffset(carouselZOffset) {
 }
 
 function returnItemClasses(item, index, propsListLength, carouselRotation) {
-     let classes = []
+     let classes = [] 
 
-     if ((360 - carouselRotation) % 360 == returnIndexRotateValue(index, propsListLength))
+     if (returnRotation((360 - carouselRotation.toFixed(0)) % 360) ==  returnIndexRotateValue(index, propsListLength))
           classes.push('carousel3D__item__active')
 
-
      return classes.join(' ')
+}
+
+function returnRotation(number) {
+     if (number < 0)
+          return 360 - Math.abs(number).toFixed(0)
+     else
+          return number.toFixed(0)
 }
 
 function returnItemStyle(item, index, propsListLength, carouselZOffset, backfaceVisibility) {
@@ -162,7 +168,7 @@ function returnItemStyle(item, index, propsListLength, carouselZOffset, backface
 function returnIndexRotateValue(index, propsListLength) {
      let rotateValue = (360 / propsListLength) * (index + 1)
      if (rotateValue == 360) return 0
-     return rotateValue
+     return rotateValue.toFixed(0)
 }
 
 export default Carousel3D;
